@@ -1,0 +1,37 @@
+{
+    "format_version": 2,
+    "header": {
+        "description": "discordにチャット送信",
+        "name": "discordにチャット送信",
+        "uuid": "BA2A2425-299B-4234-9EB6-1944C7B469BA",
+        "version": [ 0, 0, 1 ],
+        "min_engine_version": [ 1, 20, 0 ]
+    },
+    "modules": [
+        {
+            "description": "Example vanilla behavior pack",
+            "type": "script",
+            "uuid": "20FD352D-8FD2-47D3-A12E-6FF565EEF8E3",
+            "version": [0, 0, 1],
+            "entry":"scripts/main.js"
+        }
+    ],
+    "dependencies": [
+      {
+        "module_name" : "@minecraft/server",
+        "version": "1.3.0-beta" 
+       },
+       {
+        "module_name" : "@minecraft/server-net",
+        "version": "1.0.0-beta" 
+       },
+       {
+        "module_name": "@minecraft/server-ui",
+        "version": "1.1.0-beta"
+       },
+       {
+        "module_name": "@minecraft/server-admin",
+        "version": "1.0.0-beta"
+       }
+    ]
+}
