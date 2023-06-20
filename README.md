@@ -8,14 +8,18 @@ discord botを作成し、tokenとチャンネルIDを設定することで通�
 ## 導入方法
 ### discord BOTの作成
 https://discord.com/developers からbotを作成しtokenを取得してください（具体的な作り方は省略）。注意点として、bot作成時にMESSAGE CONTENT INTENTにチェックを入れること、URL作成時にメッセージの書き込みと読み込みの権限を与えるようにしてください。
-botを通信したいdiscordサーバに参加させたのち、通信させるチャンネルのIDも必要ですのでコピーしてください。
+botを通信したいdiscordサーバに参加させたら、通信させるチャンネルのIDも必要ですのでコピーしてください。
 ### configの設定
 config_tmp 内にある20fd352d-8fd2-47d3-a12e-6ff565eef8e3ファイルを丸ごと(BDSディレクトリ)/config　内に設置し (BDSディレクトリ)/config/20fd352d-8fd2-47d3-a12e-6ff565eef8e3/variables.json　となるようにしてください。その後variables.jsonを開きdiscord botのtokenと通信を行うチャンネルIDを入力してください。
 ### マイクラに導入 
 configの設定を終えたら、ワールドに導入してサーバを起動してください。正常に設定がなされていればワールド内でOP権限をもつプレイヤーがチャット内に
+```
 !discord start
+```
 と入力すると通信が開始されます。終了時は
+```
 !discord stop
+```
 としてください。
 
 
