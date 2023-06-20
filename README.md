@@ -12,7 +12,7 @@ botを通信したいdiscordサーバに参加させたら、通信させるチ�
 ### configの設定
 config_tmp 内にある20fd352d-8fd2-47d3-a12e-6ff565eef8e3ファイルを丸ごと(BDSディレクトリ)/config　内に設置し (BDSディレクトリ)/config/20fd352d-8fd2-47d3-a12e-6ff565eef8e3/variables.json　となるようにしてください。その後variables.jsonを開きdiscord botのtokenと通信を行うチャンネルIDを入力してください。
 ### マイクラに導入 
-configの設定を終えたら、ワールドに導入してサーバを起動してください。正常に設定がなされていればワールド内でOP権限をもつプレイヤーがチャット内に
+configの設定を終えたら、ワールドにビヘイビアパックを導入してサーバを起動してください。正常に設定がなされていればワールド内でOP権限をもつプレイヤーがチャット内に
 ```
 !discord start
 ```
