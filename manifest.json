@@ -11,6 +11,7 @@
         {
             "description": "Example vanilla behavior pack",
             "type": "script",
+            "language": "javascript",
             "uuid": "20FD352D-8FD2-47D3-A12E-6FF565EEF8E3",
             "version": [0, 0, 1],
             "entry":"scripts/main.js"

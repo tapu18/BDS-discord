@@ -1,0 +1,7 @@
+{
+    "BDSdiscordToken" : "トークンを入力(string)",
+    "BDSdiscordChannelID" : "チャンネルIDを入力(string)",
+    "power":false,
+    "check_no_player":false,
+    "polling_rate":140
+}

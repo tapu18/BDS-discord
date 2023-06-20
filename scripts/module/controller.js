@@ -1,6 +1,5 @@
-import {world,system,DynamicPropertiesDefinition} from "@minecraft/server";
+import {world,system} from "@minecraft/server";
 import {BDSdiscord} from './discord';
-import * as ui from "@minecraft/server-ui"
 class Controller{
     constructor(conf){
         this.discord = new BDSdiscord();
@@ -24,8 +23,7 @@ class Controller{
                     }
                     else{
                         this.run();
-                        this.power = true;
-                        world.sendMessage("discordとの通信を開始しました");
+                        this.power = true;       
                         //console.log("discordとの通信を開始しました");
                     }
                 }
@@ -37,7 +35,6 @@ class Controller{
                     else{
                         this.stop();
                         this.power = false;
-                        world.sendMessage("discordとの通信を終了しました");
                         //console.log("discordとの通信を開始しました");
                     }
                 }            
@@ -46,8 +43,11 @@ class Controller{
         if(this.power) this.run(); //デフォルトonなら開始
     }
     
-    run(){
+    async run(){
         /* BDS->discord */
+        await this.discord.get_recently_discord(); //開始前に一度最新のメッセージを取得しておく
+        world.sendMessage("discordとの通信を開始しました");
+        console.log("Start communication with discord");
         this.eventIDs.chatSend = world.afterEvents.chatSend.subscribe((ev)=>{
             if(!ev.sendToTargets){
                 if(ev.sender !=undefined)
@@ -67,26 +67,19 @@ class Controller{
 
         /* discord->BDS */
         this.eventIDs.runInterval = system.runInterval(()=>{
-            if(this.config.check_no_player || world.getAllPlayers().length != 0)
-            this.discord.get_discord().then((data)=>{
-                if(data != undefined && data[0] != undefined){
-                    data.forEach(element => {
-                        if(! element.author.bot ==true){//botメッセージは除外     
-                            world.sendMessage(`<discord:${element.author.username}>${element.content}`);
-                            console.log(`<discord:${element.author.username}>${element.content}`);
-                        }
-                    });
-                    this.nochat_interval = 0;
-                }
-                else {
-                    this.nochat_interval+=this.config.busy_polling_rate;
-                }
-            });
-
-            if(this.nochat_interval > this.config.busy_to_idle){
-
+            if(this.config.check_no_player || world.getAllPlayers().length != 0){
+                this.discord.get_discord().then((data)=>{
+                    if(data != undefined && data[0] != undefined){
+                        data.forEach(element => {
+                            if(! element.author.bot ==true){//botメッセージは除外     
+                                world.sendMessage(`<discord:${element.author.username}>${element.content}`);
+                                //console.log(`<discord:${element.author.username}>${element.content}`);
+                            }
+                        });
+                    }
+                });
             }
-        },this.config.busy_polling_rate);
+        },this.config.polling_rate);
     }
 
     stop(){
@@ -94,6 +87,8 @@ class Controller{
         if(this.eventIDs.playerJoin !=undefined) world.afterEvents.playerJoin.unsubscribe(this.eventIDs.playerJoin);
         if(this.eventIDs.playerLeave !=undefined) world.afterEvents.playerJoin.unsubscribe(this.eventIDs.playerLeave);
         if(this.eventIDs.runInterval !=undefined) system.clearRun(this.eventIDs.runInterval);
+        world.sendMessage("discordとの通信を終了しました");
+        console.log("Stop communication with discord");
     }
 }
 export default Controller
